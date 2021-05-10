@@ -640,7 +640,7 @@ class API(object):
                     return self.two_factor_auth()
                 # End of Interactive Two-Factor Authentication
                 else:
-                    msg = "Instagram's error message: {}"
+                    msg = f'[{self.username}]' + "Instagram's error message: {}"
                     self.logger.info(msg.format(response_data.get("message")))
                     if "error_type" in response_data:
                         msg = "Error type: {}".format(response_data["error_type"])
