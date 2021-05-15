@@ -451,6 +451,9 @@ class API(object):
                 code = int(code)
                 break
 
+        if not code:
+            raise Exception('No code found in cache')    
+
         data = json.dumps({"security_code": code})
         try:
             self.send_request(challenge_url, data, login=True)
