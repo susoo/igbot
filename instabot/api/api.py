@@ -428,11 +428,11 @@ class API(object):
             return False
 
         choices = self.get_challenge_choices()
-        for choice in choices:
-            print(choice)
-        code = input("Insert choice: ")
+        # for choice in choices:
+        #     print(choice)
+        # code = input("Insert choice: ")
 
-        data = json.dumps({"choice": code})
+        data = json.dumps({"choice": 1})
         try:
             self.send_request(challenge_url, data, login=True)
         except Exception as e:
@@ -440,7 +440,16 @@ class API(object):
             return False
 
         print("A code has been sent to the method selected, please check.")
-        code = input("Insert code: ").replace(" ", "")
+        # code = input("Insert code: ").replace(" ", "")
+        from django.core.cache import cache
+
+        for i in range(5):
+            time.sleep(60)
+            print(self.username, 'code trial', i)
+            code = cache.get(f'{self.username}_instagram_code')
+            if code:
+                code = int(code)
+                break
 
         data = json.dumps({"security_code": code})
         try:
