@@ -433,6 +433,7 @@ class API(object):
         # code = input("Insert choice: ")
 
         data = json.dumps({"choice": 1})
+        time.sleep(random.randint(6,20))
         try:
             self.send_request(challenge_url, data, login=True)
         except Exception as e:
@@ -617,7 +618,7 @@ class API(object):
                         "Since we hit 15 minutes of time outs, we have to restart. Removing session and cookies. Please relogin."
                     )
                     delete_credentials(self.base_path)
-                    sys.exit()
+                    raise Exception('429')
                 timeout_minutes += 5
                 self.logger.warning(
                     "That means 'too many requests'. I'll go to sleep "
