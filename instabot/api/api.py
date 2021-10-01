@@ -603,10 +603,10 @@ class API(object):
                     "response text is not JSON"
                 )
                 self.logger.info("Full Response: {}".format(str(response)))
-                try:
-                    self.logger.info("Response Text: {}".format(str(response.text)))
-                except Exception:
-                    pass
+                # try:
+                #     self.logger.info("Response Text: {}".format(str(response.text)))
+                # except Exception:
+                #     pass
             if response.status_code == 429:
                 # if we come to this error, add 5 minutes of sleep everytime we hit the 429 error (aka soft bann) keep increasing untill we are unbanned
                 if timeout_minutes is None:
