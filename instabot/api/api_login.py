@@ -123,6 +123,7 @@ def pre_login_flow(self):
     # /api/v1/launcher/sync/ (server_config_retrieval)
     self.sync_launcher(True)
 
+    time.sleep(0.5)
     # /api/v1/accounts/get_prefill_candidates
     self.get_prefill_candidates(True)
 

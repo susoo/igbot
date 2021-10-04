@@ -268,7 +268,7 @@ class API(object):
 
         set_device = generate_all_uuids = True
         self.set_user(username, password)
-        self.session = requests.Session()
+        self.session = requests.Session(verify=False)
 
         self.proxy = proxy
         self.set_proxy()  # Only happens if `self.proxy`
@@ -298,7 +298,7 @@ class API(object):
                     force = True
 
         if not cookie_is_loaded and (not self.is_logged_in or force):
-            self.session = requests.Session()
+            self.session = requests.Session(verify=False)
             if use_uuid is True:
                 if (
                     self.load_uuid_and_cookie(
@@ -572,9 +572,7 @@ class API(object):
                 return False
         else:
             self.logger.debug(
-                "Responsecode indicates error; response content: {}".format(
-                    response.content
-                )
+                "Responsecode indicates error"
             )
             if response.status_code != 404 and response.status_code != "404":
                 self.logger.error(
