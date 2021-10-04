@@ -268,7 +268,8 @@ class API(object):
 
         set_device = generate_all_uuids = True
         self.set_user(username, password)
-        self.session = requests.Session(verify=False)
+        self.session = requests.Session()
+        self.session.verify = False
 
         self.proxy = proxy
         self.set_proxy()  # Only happens if `self.proxy`
@@ -298,7 +299,8 @@ class API(object):
                     force = True
 
         if not cookie_is_loaded and (not self.is_logged_in or force):
-            self.session = requests.Session(verify=False)
+            self.session = requests.Session()
+            self.session.verify = False
             if use_uuid is True:
                 if (
                     self.load_uuid_and_cookie(
